@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+<div class="container-fluide main_content">
+    <div class="row justify-content-center wall_register">
+        <div class="d-flex justify-content-center form">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Bienvenue chez Pur Beurre</legend>
+                    {{ form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Se connecter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="d-flex justify-content-center test">
+            <small class=" text-muted">
+                Vous n'avez pas encore votre compte ? <a class="ml-2" href="{% url 'register' %}">Créer son compte</a>
+            </small>
+        </div>
+    </div>
+</div>
+{% endblock body %}

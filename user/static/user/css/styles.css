@@ -1,0 +1,46 @@
+.form{
+    margin-top: 120px;
+    margin-bottom: auto;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    margin-left: 10%;
+    
+  }
+
+.main_content{
+background: url(../assets/img/wall_register_page.jpg);
+background-repeat: no-repeat;
+background-size: cover;
+height: 72%;
+}
+
+.test{
+  margin-left: 20%;
+}
+.account-img{
+  height: 120px;
+  width: 120px;
+}
+.logout_message{
+  margin-top: 20vh;
+  margin-bottom: 20vh;
+  margin-left: 25vw;
+
+
+}
+.wall_logout{
+background: url(../assets/img/wall_logout_page.jpg);
+background-repeat: no-repeat;
+background-size: cover;
+height: 80vh;
+}
+.body_message{
+  margin-top: 25%;
+}
+.flex_logout_message{
+  width: 70vw;
+}
+
+.profile{
+  margin-top: 10vh;
+}

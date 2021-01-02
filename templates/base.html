@@ -1,0 +1,142 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>{% block title %}Pur Beurre{% endblock %}</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/img/logo.png'%}" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
+        rel="stylesheet" type="text/css" />
+    <!-- Third party plugin CSS-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css"
+        rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'css/styles.css'%}" rel="stylesheet" />
+    <link href="{% static 'user/css/styles.css'%}" rel="stylesheet" />
+    <link href="{% static 'user_profile/css/styles.css'%}" rel="stylesheet" />
+    <link href="{% static 'product/css/style.css' %}" rel="stylesheet" />
+</head>
+
+<body id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 navbar-scrolled" id="mainNav">
+        <div class="container">
+            <img src="{% static 'assets/img/logo.png'%}" class="logo">
+            <a class="navbar-brand js-scroll-trigger marque" href="{% url 'app-home' %}">Pur Beurre</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="d-flex justify-content-end">
+
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                    <li class="nav-item">
+                        <form class="form-inline d-flex" action="{% url 'get_product' %}" method="post">
+                            {% csrf_token %}
+                            {{ search_form|crispy}}
+                            <button name='button_send' id='button_send' type="submit"
+                                class="btn btn-primary ml-2 ">Envoyer</button>
+                        </form>
+                    </li>
+
+                    {% if user.is_authenticated %}
+                    <li class="nav-item"><img class="rounded-circle nav-account-img" src="{{ user.image.url }}"></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger username"
+                            href="{% url 'profile' %}">{{ user.username }}</a> </li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'user_favorite' %}">
+                            <img class="rounded-circle nav-account-img-favoris"
+                                src="{% static 'assets/img/favoris.png' %}"></a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle login_logout_menu" type="button"
+                                data-toggle="dropdown">
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="{% url 'profile' %}"><span
+                                        class="fa fa-life-ring"></span>Paramètres</a>
+                                <a class="dropdown-item" href="{% url 'logout' %}"><span class="fa fa-wrench"></span>Se
+                                    déconnecter</a>
+                            </div>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'login' %}">Login</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'register' %}">Register</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{message.tags}}">
+        {{message}}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% block body %}
+
+    {% endblock %}
+
+    <!-- Contact-->
+    <section class="page-section" id="contact">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="mt-0">Contactez-nous !</h2>
+                    <hr class="divider my-4" />
+                    <p class="text-muted mb-5">Des questions au sujet de notre entreprise, n'hésitez plus et
+                        contactez-nous par mail ou par téléphone</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 ml-auto text-center mb-5 mb-lg-0">
+                    <i class="fas fa-phone fa-3x mb-3 text-muted"></i>
+                    <div>01 80 88 80 30</div>
+                </div>
+                <div class="col-lg-4 mr-auto text-center">
+                    <i class="fas fa-envelope fa-3x mb-3 text-muted"></i>
+                    <!-- Make sure to change the email address in BOTH the anchor text and the link target below!-->
+                    <a class="d-block" href="mailto:contact@purbeurre.com">contact@purbeurre.com</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer-->
+    <footer class="bg-light py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-6 text-center">
+                    <a href="{% url 'legale' %}">Mention Légale</a>
+                </div>
+                <div class="col-6 text-center">
+                    <a href="mailto:contact@purbeurre.com">Contactez nous</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+    <!-- Third party plugin JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+</body>
+
+</html>

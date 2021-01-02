@@ -1,0 +1,26 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+flake8 = "*"
+autopep8 = "*"
+isort = {extras = ["pipfile", "requirements"], version = "*"}
+docformatter = "*"
+
+[packages]
+django = "*"
+psycopg2-binary = "*"
+pillow = "*"
+requests = "*"
+django-crispy-forms = "*"
+gunicorn = "*"
+whitenoise = "*"
+dj-database-url = "*"
+pytest-django = "*"
+coverage = "*"
+python-dotenv = "*"
+
+[requires]
+python_version = "3.7"

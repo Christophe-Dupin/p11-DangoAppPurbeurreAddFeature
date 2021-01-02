@@ -1,0 +1,15 @@
+[run]
+omit =
+    */migrations/*
+    */tests/*
+    */__init__.py
+    */settings.py
+    */urls.py
+    */apps.py
+    */admin.py
+    */manage.py
+    */models.py
+    */forms.py
+    */signals.py
+    purBeurre/asgi.py
+    purBeurre/wsgi.py 

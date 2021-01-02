@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container headerFavoris">
+    <div class="text-center title">
+        <h1>Vos Favoris</h1>
+    </div>
+    {% for x in get_favoris_by_user %}
+    <div class="d-flex product-card">
+        <div class="mr-auto p-2">
+            <h3>Produit d'origine:</h3>
+            <img class="img-fluid product-img rounded mb-1" src="{{x.products_substitute.image_url}}">
+            <a class="d-block mb-2" href="{{x.products_substitute.url_page}}">
+                {{x.products_substitute.product_name}}</a>
+            <div class="nutriscore nutriscore-{{x.products_substitute.nutrition_grade}} text-uppercase text-center">
+                {{x.products_substitute.nutrition_grade}}
+            </div>
+        </div>
+        <div class="p-2">
+            <h3>Produit Favoris:</h3>
+            <img class="img-fluid product-img rounded mb-1" src="{{x.substitute_product.image_url}}">
+            <a class="d-block mb-2" href="{{x.substitute_product.url_page}}"> {{x.substitute_product.product_name}}</a>
+            <div class="nutriscore nutriscore-{{x.substitute_product.nutrition_grade}} text-uppercase text-center">
+                {{x.substitute_product.nutrition_grade}}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock body %}
