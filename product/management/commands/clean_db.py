@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 
-from product.models import Category, Favorite, Product
+from product.models import Category, Favorite, Product, User
 
 """Add custom Commande to clean the db."""
 
@@ -18,3 +18,4 @@ class Command(BaseCommand):
         Category.objects.all().delete()
         Product.objects.all().delete()
         Favorite.objects.all().delete()
+        User.objects.all().delete()
