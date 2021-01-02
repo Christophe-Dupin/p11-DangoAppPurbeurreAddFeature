@@ -41,7 +41,7 @@ class Category(models.Model):
     :rtype: Category
     """
 
-    name = models.CharField(max_length=1)
+    name = models.CharField(max_length=150)
     product = models.ManyToManyField(Product, related_name="category")
 
     def __str__(self):
