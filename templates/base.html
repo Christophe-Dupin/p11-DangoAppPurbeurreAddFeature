@@ -53,8 +53,8 @@
 
                     {% if user.is_authenticated %}
                     <li class="nav-item"><img class="rounded-circle nav-account-img" src="{{ user.image.url }}"></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger username" href="{% url 'profile' %}">{{
-                            user.username }}</a> </li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger username" href="{% url 'profile' %}">
+                            {{ user.username }}</a> </li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'user_favorite' %}">
                             <img class="rounded-circle nav-account-img-favoris"
                                 src="{% static 'assets/img/favoris.png' %}"></a>
