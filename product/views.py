@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views import View
+from django.http import JsonResponse
 
 from product.models import Category, Favorite, Product
 
@@ -75,3 +76,12 @@ def details_product(request, favorisBarcode):
         "product/detail.html",
         {"selected_product": selected_product},
     )
+
+
+def autocomplete(request):
+    if "term" in request.GET:
+        query = Product.objects.filter(
+            product_name__icontains=request.GET.get("term")
+        ).distinct()
+        result = [i.product_name for i in query]
+        return JsonResponse(result, safe=False)
