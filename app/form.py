@@ -10,4 +10,7 @@ class Search(forms.Form):
     :type forms: form
     """
 
-    search = forms.CharField(widget=forms.Textarea, label="", max_length=100)
+    search = forms.CharField(
+        label=False,
+        widget=forms.TextInput(attrs={"class": "search_id"}),
+    )
