@@ -14,4 +14,5 @@ urlpatterns = [
     ),
     path("user_favorite/", views.user_favorite, name="user_favorite"),
     path("detail/<int:favorisBarcode>", views.details_product, name="detail"),
+    path("autocomplete", views.autocomplete, name="autocomplete"),
 ]
