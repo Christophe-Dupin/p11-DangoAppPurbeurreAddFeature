@@ -1,4 +1,5 @@
-version: "3.7"
+version: "3"
+
 networks:
   intern:
     external: false
@@ -6,9 +7,7 @@ networks:
 services:
   django:
     build: .
-    container_name: purBeurre_django
-    ports:
-      - 8000:8000
+    container_name: purBeurre_django_prod
     env_file:
       - ./.env
     volumes:
@@ -27,5 +26,19 @@ services:
       - intern
     volumes:
       - pgdb:/var/lib/postgresql/data
+
+  nginx:
+    image: nginx:1.19-alpine
+    container_name: purBeurre_nginx
+    volumes:
+      - ./static:/home/app/web/staticfiles
+      - ./media:/home/app/web/mediafiles
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - django
+    networks:
+      - intern
+    ports:
+      - 80:80
 volumes:
   pgdb:
