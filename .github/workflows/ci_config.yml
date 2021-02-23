@@ -9,7 +9,7 @@ env:
 jobs:
   pytest:
     env:
-      DJANGO_SETTINGS_MODULE: "config.settings.ci"
+      DJANGO_SETTINGS_MODULE: "purBeurre.settings.ci"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code Repository
