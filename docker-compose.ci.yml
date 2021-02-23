@@ -6,7 +6,9 @@ networks:
 
 services:
   django:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: purBeurre_django_prod
     env_file:
       - ./.env
