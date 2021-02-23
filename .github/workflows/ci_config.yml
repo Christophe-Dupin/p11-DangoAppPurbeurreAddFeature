@@ -33,10 +33,10 @@ jobs:
           docker pull ${{ env.NGINX_IMAGE }} || true
 
       - name: Build the Stack
-        run: docker-compose -f ./docker-compose.yml build
+        run: docker-compose -f docker-compose.ci.yml build
 
       - name: Run the Stack
-        run: docker-compose -f ./docker-compose.yml up -d
+        run: docker-compose -f docker-compose.ci.yml up -d
 
       - name: Make DB Migrations
         run: docker-compose exec -T django python manage.py migrate
