@@ -1,17 +1,31 @@
+# pull official base image
 FROM python:3.8.3-alpine
 
-WORKDIR /app
+# set work directory
+WORKDIR /usr/src/app
 
+# set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-RUN apk update && apk add postgresql-dev gcc python3-dev 
-RUN apk add musl-dev freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev
+# install psycopg2
+RUN apk update \
+    && apk add --virtual build-deps gcc python3-dev musl-dev \
+    && apk add postgresql-dev \
+    && pip install psycopg2 \
+    && apk del build-deps
+
+# install dependencies
+RUN apk --update add libxml2-dev libxslt-dev libffi-dev gcc musl-dev libgcc openssl-dev curl
+RUN apk add jpeg-dev zlib-dev freetype-dev lcms2-dev openjpeg-dev tiff-dev tk-dev tcl-dev
 RUN pip install --upgrade pip
-COPY requirements.txt /app/requirements.txt
+ADD ./requirements.txt .
 RUN pip install -r requirements.txt
 
-EXPOSE 8000
+#Add comment
+# copy entrypoint.sh
+ADD ./entrypoint.sh /usr/src/app/entrypoint.sh
 
+# run entrypoint.sh
+ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
 
-CMD ["gunicorn", "--bind", ":8000", "--workers", "3", "purBeurre.wsgi:application"]

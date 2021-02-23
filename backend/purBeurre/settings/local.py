@@ -7,7 +7,7 @@ from dotenv import find_dotenv, load_dotenv
 DEBUG = True
 load_dotenv(find_dotenv())
 SECRET_KEY = os.getenv("SECRET_KEY")
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
