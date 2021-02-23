@@ -3,8 +3,8 @@ name: Continuous Integration and Delivery
 on: [push]
 
 env:
-  WEB_IMAGE: docker.pkg.github.com/christophe-dupin/purbeurre/purbeurre_django
-  NGINX_IMAGE: docker.pkg.github.com/christophe-dupin/purbeurre/nginx
+  WEB_IMAGE: docker.pkg.github.com/christophe-dupin/p11-djangoapppurbeurreaddfeature/purbeurre_django
+  NGINX_IMAGE: docker.pkg.github.com/christophe-dupin/djangoapppurbeurreaddfeature/nginx
 
 jobs:
   pytest:
@@ -27,6 +27,7 @@ jobs:
         run: echo ${GITHUB_TOKEN} | docker login -u ${GITHUB_ACTOR} --password-stdin docker.pkg.github.com
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Pull images
         run: |
           docker pull ${{ env.WEB_IMAGE }} || true
