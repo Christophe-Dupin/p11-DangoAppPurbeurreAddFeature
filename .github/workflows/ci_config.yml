@@ -3,8 +3,8 @@ name: Continuous Integration and Delivery
 on: [push]
 
 env:
-  WEB_IMAGE: docker.pkg.github.com/christophe-dupin/purBeurre/web
-  NGINX_IMAGE: docker.pkg.github.com/christophe-dupin/purBeurre/nginx
+  WEB_IMAGE: docker.pkg.github.com/christophe-dupin/purbeurre/purbeurre_django
+  NGINX_IMAGE: docker.pkg.github.com/christophe-dupin/purbeurre/nginx
 
 jobs:
   pytest:
@@ -33,7 +33,7 @@ jobs:
           docker pull ${{ env.NGINX_IMAGE }} || true
 
       - name: Build the Stack
-        run: docker-compose -f docker-compose.yml build
+        run: docker-compose -f docker-compose.yml build .
 
       - name: Run the Stack
         run: docker-compose -f docker-compose.yml up -d
