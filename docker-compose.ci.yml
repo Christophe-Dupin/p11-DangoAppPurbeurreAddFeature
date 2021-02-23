@@ -7,8 +7,8 @@ networks:
 services:
   django:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ./
+      dockerfile: ./Dockerfile
       cache_from:
         - "${WEB_IMAGE}"
     image: "${WEB_IMAGE}"
