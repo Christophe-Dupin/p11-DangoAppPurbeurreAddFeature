@@ -5,7 +5,8 @@ networks:
 
 services:
   django:
-    build: .
+    build:
+      context: .
     container_name: purBeurre_django
     ports:
       - 8000:8000
