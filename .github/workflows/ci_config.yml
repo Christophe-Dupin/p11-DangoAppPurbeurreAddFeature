@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Add environment variables to .env
         run: |
-          echo DJANGO_SETTINGS_MODULE=config.settings.ci >> .env
+          echo DJANGO_SETTINGS_MODULE=purBeurre.settings.ci >> .env
 
       - name: Set environment variables
         run: |
