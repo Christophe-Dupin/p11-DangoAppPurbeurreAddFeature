@@ -1,5 +1,4 @@
 import os
-from dotenv import find_dotenv, load_dotenv
 from .base import *  # noqa: F401, F403
 
 ALLOWED_HOSTS = ["*"]
@@ -8,10 +7,10 @@ DEBUG = False
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "postgres",
-        "USER": "postgres",
+        "NAME": os.environ["POSTGRES_DB"],
+        "USER": os.environ["POSTGRES_USER"],
         "PASSWORD": "postgres",
-        "HOST": "postgres",
+        "HOST": os.environ["POSTGRES_HOST"],
         "PORT": "5432",
     }
 }
