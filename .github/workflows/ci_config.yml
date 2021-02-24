@@ -94,7 +94,7 @@ jobs:
 
       - name: Build and deploy images on DigitalOcean
         run: |
-          scp  -o StrictHostKeyChecking=no -r ./.env cdupin@${{ secrets.DIGITAL_OCEAN_IP_ADDRESS }}:/home/cdupin/app
+          scp  -o StrictHostKeyChecking=no -r ./.env cdupin@${{ secrets.DIGITAL_OCEAN_IP_ADDRESS }}:/home/cdupin/p11PurBeurre
           ssh -o StrictHostKeyChecking=no cdupin@${{ secrets.DIGITAL_OCEAN_IP_ADDRESS }} << 'ENDSSH'
             cd /home/cdupin/p11PurBeurre
             source .env
