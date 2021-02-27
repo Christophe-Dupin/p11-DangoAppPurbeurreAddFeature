@@ -11,13 +11,11 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 import os
 from .base import *
-from dotenv import find_dotenv, load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 )
-load_dotenv(find_dotenv())
 SECRET_KEY = os.getenv("SECRET_KEY")
 # Application definition
 
