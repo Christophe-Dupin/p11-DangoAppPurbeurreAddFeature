@@ -1,16 +1,19 @@
 import os
 from .base import *  # noqa: F401, F403
 
+SECRET_KEY = os.getenv(
+    "SECRET_KEY",
+    default="Cu96ky2qXk9yxxd4CrDOlQpFrCTJNl31sxtxBhEfpVBDxe6SGOlkUUuFT7nqk654",
+)
 ALLOWED_HOSTS = ["*"]
-SECRET_KEY = os.getenv("SECRET_KEY")
-DEBUG = False
+DEBUG = True
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": os.environ["POSTGRES_DB"],
-        "USER": os.environ["POSTGRES_USER"],
+        "NAME": "postgres",
+        "USER": "postgres",
         "PASSWORD": "postgres",
-        "HOST": os.environ["POSTGRES_HOST"],
+        "HOST": "postgres",
         "PORT": "5432",
     }
 }
