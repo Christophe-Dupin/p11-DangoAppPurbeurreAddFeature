@@ -3,8 +3,8 @@ name: Continuous Integration and Delivery
 on: [push]
 
 env:
-  WEB_IMAGE: docker.pkg.github.com/p11-djangoapppurbeurreaddfeature/django
-  NGINX_IMAGE: docker.pkg.github.com/p11-djangoapppurbeurreaddfeature/nginx
+  WEB_IMAGE: docker.pkg.github.com/p11-djangoapppurbeurreaddfeature/django:latest
+  NGINX_IMAGE: docker.pkg.github.com/p11-djangoapppurbeurreaddfeature/nginx:latest
 
 jobs:
   build:
