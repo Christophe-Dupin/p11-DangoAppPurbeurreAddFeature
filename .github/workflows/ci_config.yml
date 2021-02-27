@@ -3,8 +3,8 @@ name: Continuous Integration and Delivery
 on: [push]
 
 env:
-  WEB_IMAGE: docker.pkg.github.com/p11-djangoapppurbeurreaddfeature/django:latest
-  NGINX_IMAGE: docker.pkg.github.com/p11-djangoapppurbeurreaddfeature/nginx:latest
+  WEB_IMAGE: docker.pkg.github.com/christophe-dupin/p11-dangoapppurbeurreaddfeature/django
+  NGINX_IMAGE: docker.pkg.github.com/p11-djangoapppurbeurreaddfeature/nginx
 
 jobs:
   build:
@@ -42,5 +42,5 @@ jobs:
           docker-compose -f docker-compose.ci.yml build
       - name: Push images
         run: |
-          docker push ${{ env.WEB_IMAGE }}
-          docker push ${{ env.NGINX_IMAGE }}
+          docker push ${{ env.WEB_IMAGE }}:latest
+          docker push ${{ env.NGINX_IMAGE }}:latest
