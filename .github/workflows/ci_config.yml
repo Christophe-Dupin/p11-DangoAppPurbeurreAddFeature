@@ -48,7 +48,6 @@ jobs:
   deploy:
     name: Deploy to DigitalOcean
     runs-on: ubuntu-latest
-    needs: build
     steps:
       - name: Checkout master
         uses: actions/checkout@v1
@@ -73,15 +72,18 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > id_rsa
           chmod 664 ~/.ssh/id_rsa.pub
           chmod 600 ~/.ssh/id_rsa
-
+      - name: Set environment variables
+        run: |
+          echo "WEB_IMAGE=${WEB_IMAGE}" >> $GITHUB_ENV
+          echo "NGINX_IMAGE=${NGINX_IMAGE}" >> $GITHUB_ENV
       - name: Build and deploy images on DigitalOcean
         run: |
-          scp  -o StrictHostKeyChecking=no -r ./.env ./docker-compose.prod.yml cdupin@${{ secrets.DIGITAL_OCEAN_IP_ADDRESS }}:/home/cdupin/p11-purbeurre
+          scp  -o StrictHostKeyChecking=no -r ./.env ./.env.prod.db ./docker-compose.prod.yml cdupin@${{ secrets.DIGITAL_OCEAN_IP_ADDRESS }}:/home/cdupin/p11-purbeurre
           ssh -o StrictHostKeyChecking=no cdupin@${{ secrets.DIGITAL_OCEAN_IP_ADDRESS }} << 'ENDSSH'
             cd /home/cdupin/p11-purbeurre
             source .env
             docker login docker.pkg.github.com -u ${GITHUB_ACTOR} -p ${TOKEN_GITHUB}
             docker pull $WEB_IMAGE
-            docker pull $NGINX_IMAGE
+            docker pull $env.NGINX_IMAGE
             docker-compose -f docker-compose.prod.yml up -d
           ENDSSH
