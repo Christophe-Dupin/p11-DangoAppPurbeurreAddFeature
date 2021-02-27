@@ -77,13 +77,17 @@ jobs:
         run: |
           echo "WEB_IMAGE=${WEB_IMAGE}" >> $GITHUB_ENV
           echo "NGINX_IMAGE=${NGINX_IMAGE}" >> $GITHUB_ENV
+      - name: Log in to GitHub Packages
+        run: echo ${GITHUB_TOKEN} | docker login -u ${GITHUB_ACTOR} --password-stdin docker.pkg.github.com
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build and deploy images on DigitalOcean
         run: |
           scp  -o StrictHostKeyChecking=no -r ./.env ./.env.prod.db ./docker-compose.prod.yml cdupin@${{ secrets.DIGITAL_OCEAN_IP_ADDRESS }}:/home/cdupin/p11-purbeurre
           ssh -o StrictHostKeyChecking=no cdupin@${{ secrets.DIGITAL_OCEAN_IP_ADDRESS }} << 'ENDSSH'
             cd /home/cdupin/p11-purbeurre
             source .env
-            docker login docker.pkg.github.com -u ${GITHUB_ACTOR} -p ${TOKEN_GITHUB}
             docker pull ${{ env.WEB_IMAGE }}
             docker pull ${{ env.NGINX_IMAGE }}
             docker-compose -f docker-compose.prod.yml up -d
