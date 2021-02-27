@@ -1,11 +1,8 @@
 version: "3"
 services:
   django:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile.prod
+    image: "${WEB_IMAGE}"
     command: gunicorn purBeurre.wsgi:application --bind 0.0.0.0:8000
-    container_name: purbeurre_django_prod
     volumes:
       - static_volume:/home/app/web/staticfiles
       - media_volume:/home/app/web/mediafiles
@@ -16,9 +13,7 @@ services:
     depends_on:
       - postgres
   nginx:
-    build:
-      context: ./nginx
-    container_name: purbeurre_nginx_prod
+    image: "${NGINX_IMAGE}"
     volumes:
       - static_volume:/home/app/web/staticfiles
       - media_volume:/home/app/web/mediafiles
