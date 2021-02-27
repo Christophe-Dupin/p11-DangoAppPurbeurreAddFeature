@@ -17,7 +17,7 @@ jobs:
 
       - name: Add environment variables to .env
         run: |
-          echo DJANGO_SETTINGS_MODULE=config.settings.ci >> .env
+          echo DJANGO_SETTINGS_MODULE=purBeurre.settings.ci >> .env
           echo DATABASE=postgres >>.env
 
       - name: Set environment variables
