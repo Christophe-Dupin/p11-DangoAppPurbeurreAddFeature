@@ -4,7 +4,7 @@ on: [push]
 
 env:
   WEB_IMAGE: docker.pkg.github.com/christophe-dupin/p11-dangoapppurbeurreaddfeature/django
-  NGINX_IMAGE: docker.pkg.github.com/p11-djangoapppurbeurreaddfeature/nginx
+  NGINX_IMAGE: docker.pkg.github.com/christophe-dupin/p11-dangoapppurbeurreaddfeature/nginx
 
 jobs:
   build:
