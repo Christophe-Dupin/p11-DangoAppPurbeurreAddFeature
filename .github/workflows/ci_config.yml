@@ -63,6 +63,8 @@ jobs:
           echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> .env
           echo POSTGRES_HOST=${{ secrets.POSTGRES_HOST }} >> .env
           echo POSTGRES_PORT=${{ secrets.POSTGRES_PORT }} >> .env
+          echo WEB_IMAGE=${{ env.WEB_IMAGE }} >> .env
+          echo NGINX_IMAGE=${{ env.NGINX_IMAGE }} >> .env
 
       - name: Create ssh key
         run: |
@@ -73,14 +75,6 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > id_rsa
           chmod 664 ~/.ssh/id_rsa.pub
           chmod 600 ~/.ssh/id_rsa
-      - name: Set environment variables
-        run: |
-          echo "WEB_IMAGE=${WEB_IMAGE}" >> $GITHUB_ENV
-          echo "NGINX_IMAGE=${NGINX_IMAGE}" >> $GITHUB_ENV
-      - name: Log in to GitHub Packages
-        run: echo ${GITHUB_TOKEN} | docker login -u ${GITHUB_ACTOR} --password-stdin docker.pkg.github.com
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and deploy images on DigitalOcean
         run: |
@@ -88,6 +82,7 @@ jobs:
           ssh -o StrictHostKeyChecking=no cdupin@${{ secrets.DIGITAL_OCEAN_IP_ADDRESS }} << 'ENDSSH'
             cd /home/cdupin/p11-purbeurre
             source .env
+            docker login docker.pkg.github.com -u christophe-dupin  -p${{ secrets.TOKEN_GITHUB }}
             docker pull ${{ env.WEB_IMAGE }}
             docker pull ${{ env.NGINX_IMAGE }}
             docker-compose -f docker-compose.prod.yml up -d
