@@ -30,7 +30,7 @@ services:
       - intern
       - extern
     labels:
-      - traefik.http.routers.nameyourrouter.rule=Host(`p11purbeurre.christophe-dupin.com`)
+      - traefik.http.routers.nameyourrouter.rule=Host(`p11purbeurre.christophe-dupin.com)
       - traefik.http.routers.nameyourrouter.tls=true
       - traefik.http.routers.nameyourrouter.tls.certresolver=lets-encrypt
       - traefik.port=80
