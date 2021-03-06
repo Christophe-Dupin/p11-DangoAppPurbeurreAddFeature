@@ -5,7 +5,7 @@ from .base import *
 
 DEBUG = os.environ["DEBUG"]
 SECRET_KEY = os.environ["SECRET_KEY"]
-ALLOWED_HOSTS = ["157.245.249.94"]
+ALLOWED_HOSTS = ["p11purbeurre.christophe-dupin.com"]
 DATABASES = {
     "default": {
         "ENGINE": os.environ["POSTGRES_ENGINE"],
